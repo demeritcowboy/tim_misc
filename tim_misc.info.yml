@@ -1,9 +1,6 @@
 name: Torah in Motion (TiM Customizations by JMA)
 description: This module holds customizations related to the site.
 package: Custom
-css:
-  theme:
-    css/tim_misc.css: {}
 
 type: module
 core: 8.x

@@ -1,0 +1,5 @@
+tim_misc:
+  version: 1.0
+  css:
+    theme:
+      css/tim_misc.css: {}
