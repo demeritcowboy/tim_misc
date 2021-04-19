@@ -1,0 +1,3 @@
+.navbar-default .navbar-nav>li:nth-child(5)>a {
+    text-transform: none !important;
+}
