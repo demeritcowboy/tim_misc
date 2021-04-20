@@ -17,8 +17,8 @@ class LoginBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $className = "top-menu";
     if (\Drupal::service('path.matcher')->isFrontPage()) {
-      $className = "top-menu";
       $buttonColour = "white";
     }
     else {
