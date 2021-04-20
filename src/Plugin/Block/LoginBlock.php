@@ -17,19 +17,20 @@ class LoginBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    // Build block for anonymous user.
-    $html = '
-    <div class="clearfix hidden-xs">
-      <div class="top-menu else">
-        <ul>
-	      <li><a href="/user">Profile</a></li>
-	      <li><a href="/user/logout">Log out</a></li>
-	      <li><a href="/contact">Contact Us</a></li>
-	      <li><a class="use-ajax btn btn-rounded dark small" data-dialog-options="{&quot;width&quot;:700}" data-dialog-type="modal" href="/donation-page">Donate</a></li>
-        </ul>
-      </div>
-    </div>';
     if (\Drupal::currentUser()->isAuthenticated()) {
+      $html = '
+      <div class="clearfix hidden-xs">
+        <div class="top-menu else">
+          <ul>
+	        <li><a href="/user">Profile</a></li>
+	        <li><a href="/user/logout">Log out</a></li>
+	        <li><a href="/contact">Contact Us</a></li>
+	        <li><a class="use-ajax btn btn-rounded dark small" data-dialog-options="{&quot;width&quot;:700}" data-dialog-type="modal" href="/donation-page">Donate</a></li>
+          </ul>
+        </div>
+      </div>';
+    }
+    else {
       $link = \Drupal::service('path.current')->getPath();
       $userLink = "/user/login?destination=" . $link;
 
@@ -43,7 +44,6 @@ class LoginBlock extends BlockBase {
           </ul>
         </div>
       </div>';
-
     }
     return [
       '#markup' => $html,
