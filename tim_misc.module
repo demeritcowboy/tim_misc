@@ -1,2 +1,6 @@
 <?php
 
+function tim_misc_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] = 'tim_misc/tim_misc';
+}
+
