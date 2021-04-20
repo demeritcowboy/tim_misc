@@ -11,8 +11,8 @@ use Drupal\Core\Session\AccountInterface;
  * Provides a block with a simple text.
  *
  * @Block(
- *   id = "my_block_example_block",
- *   admin_label = @Translation("My block"),
+ *   id = "tim_misc",
+ *   admin_label = @Translation("Login Block"),
  * )
  */
 class LoginBlock extends BlockBase {
