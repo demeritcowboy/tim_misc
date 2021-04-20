@@ -17,10 +17,12 @@ class LoginBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $className = "top-menu";
-    $buttonColour = "white";
-    if (!\Drupal::service('path.matcher')->isFrontPage()) {
-      $className . " else";
+    if (\Drupal::service('path.matcher')->isFrontPage()) {
+      $className = "top-menu";
+      $buttonColour = "white";
+    }
+    else {
+      $className .= " else";
       $buttonColour = "dark";
     }
     if (\Drupal::currentUser()->isAuthenticated()) {
