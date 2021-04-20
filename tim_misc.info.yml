@@ -4,3 +4,5 @@ package: Custom
 
 type: module
 core: 8.x
+libraries:
+  - tim_misc/tim_misc_css
