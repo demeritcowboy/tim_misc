@@ -55,6 +55,7 @@ class LoginBlock extends BlockBase {
     }
     return [
       '#markup' => $html,
+      '#cache' => ['contexts' => ['url.path']],
     ];
   }
 }
