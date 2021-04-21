@@ -4,3 +4,16 @@ function tim_misc_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = 'tim_misc/tim_misc';
 }
 
+function tim_misc_preprocess_views_view_field(&$variables) {
+  $view = $variables['view'];
+  $field = $variables['field'];
+  if ($view->storage->id() == 'podcast_view' &&
+  $field->field == 'field_podcast') {
+  if (strpos($variables['output'], 'access-to-free-content') !== false) {
+      $link = \Drupal::service('path.current')->getPath();
+      $contentLink = "access-to-free-content?originaldest=" . $link;
+      $variables['output'] = \Drupal\Core\Render\Markup::create(str_replace("access-to-free-content",$contentLink,$variables['output']));
+    }
+  }
+}
+
