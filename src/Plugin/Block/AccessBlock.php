@@ -8,7 +8,7 @@ use Drupal\Core\Block\BlockBase;
  * Provides a block with a simple text.
  *
  * @Block(
- *   id = "tim_misc",
+ *   id = "tim_misc_access",
  *   admin_label = @Translation("Access Block"),
  * )
  */
