@@ -20,7 +20,7 @@ class AccessBlock extends BlockBase {
     $dest = \Drupal::request()->get('originaldest');
     $loginUrl = "/user/login";
     if (!empty($dest)) {
-      $loginUrl .= $dest;
+      $loginUrl .= '?destination=' . $dest;
     }
     $html = '<div class="popup-intro"><strong>It looks like you are currently not logged in. All our podcasts are available for free.</strong></div>
 
