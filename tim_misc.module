@@ -7,13 +7,38 @@ function tim_misc_preprocess_page(&$variables) {
 function tim_misc_preprocess_views_view_field(&$variables) {
   $view = $variables['view'];
   $field = $variables['field'];
-  if ($view->storage->id() == 'podcast_view' &&
-  $field->field == 'field_podcast') {
-  if (strpos($variables['output'], 'access-to-free-content') !== false) {
-      $link = \Drupal::service('path.current')->getPath();
-      $contentLink = "access-to-free-content?originaldest=" . $link;
-      $variables['output'] = \Drupal\Core\Render\Markup::create(str_replace("access-to-free-content",$contentLink,$variables['output']));
+  // Note this acts on both field_podcast (the audio element) and
+  // field_podcast_1 (the download icon) because they have the same `field`
+  // value. The code lower down would be cleaner, but still silly, if I knew
+  // how to tell the two apart.
+  if ($view->storage->id() == 'podcast_view' && $field->field == 'field_podcast') {
+    // This is silly. For the field_podcast we can use either the
+    // original_value or the rewritten value. But for the field_podcast_1 we
+    // need to manipulate the original_value to make the output useful. So the
+    // rewrite value is similar in the field definition, but we're relying
+    // on the word 'download' being in the one for the download icon.
+    if (strpos($variables['output'], 'access-to-free-content') !== FALSE) {
+      if (\Drupal::currentUser()->isAnonymous()) {
+        // It's now in the view field since we really want the individual
+        // podcast as the redirect.
+        /*
+        // field contains a rewrite value - update it a little
+        $link = \Drupal::service('path.current')->getPath();
+        $contentLink = "access-to-free-content?originaldest=" . $link;
+        $variables['output'] = \Drupal\Core\Render\Markup::create(str_replace("access-to-free-content",$contentLink,$variables['output']));
+         */
+      }
+      else {
+        // ignore the rewrite and use the original output
+        if (strpos($variables['output'], 'download') !== FALSE) {
+          // field_podcast_1
+          $variables['output'] = \Drupal\Core\Render\Markup::create('<a href="' . htmlspecialchars($field->original_value) . '" download><i class="fa fa-download" aria-hidden="true"></i></a>');
+        }
+        else {
+          // field_podcast - can use value as-is
+          $variables['output'] = $field->original_value;
+        }
+      }
     }
   }
 }
-

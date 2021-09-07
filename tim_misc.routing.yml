@@ -1,0 +1,7 @@
+tim_misc.access_to_free_content:
+  path: '/access-to-free-content'
+  defaults:
+    _controller: '\Drupal\tim_misc\Controller\TimMiscController::freeContent'
+    _title: 'This content is available for free!'
+  requirements:
+    _permission: 'access content'

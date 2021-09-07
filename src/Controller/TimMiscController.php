@@ -1,30 +1,22 @@
 <?php
+namespace Drupal\tim_misc\Controller;
 
-namespace Drupal\tim_misc\Plugin\Block;
-
-use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Controller\ControllerBase;
 
 /**
- * Provides a block with a simple text.
- *
- * @Block(
- *   id = "tim_misc_access",
- *   admin_label = @Translation("Access Block")
- * )
+ * Provides route responses for the TimMisc module.
  */
-class AccessBlock extends BlockBase {
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheMaxAge() {
-    return 0;
-  }
+class TimMiscController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
+   * Returns the text for the access-to-free-content popup
+   *
+   * @return array
+   *   A simple renderable array.
    */
-  public function build() {
+  public function freeContent() {
     $dest = \Drupal::request()->get('originaldest');
+    //\Drupal::logger('dave')->info("Yoodles $dest");
     $loginUrl = "/user/login";
     if (!empty($dest)) {
       $loginUrl .= '?destination=' . $dest;
@@ -52,4 +44,5 @@ class AccessBlock extends BlockBase {
       '#cache' => ['contexts' => ['url.path']],
     ];
   }
+
 }
